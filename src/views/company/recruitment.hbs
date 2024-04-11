@@ -1,0 +1,302 @@
+<section class='bg-half bg-light d-table w-100'>
+	<div class='container'>
+		<div class='row justify-content-center'>
+			<div class='col-lg-12 text-center'>
+				<div class='page-next-level'>
+					<h4 class='title'> Đăng Tin Tuyển Dụng </h4>
+					<div class='page-next'>
+						<nav aria-label='breadcrumb' class='d-inline-block'>
+							<ul class='breadcrumb bg-white rounded shadow mb-0'>
+								<li class='breadcrumb-item'><a href='/'>Trang chủ</a></li>
+								<li class='breadcrumb-item'><a
+										href='/companies/{{isEmployer.meta}}'
+									>{{isEmployer.name}}</a></li>
+								<li class='breadcrumb-item active' aria-current='page'>Đăng tin
+									tuyển dụng</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+			<!--end col-->
+		</div><!--end row-->
+	</div>
+	<!--end container-->
+</section><!--end section-->
+
+<div class='position-relative'>
+	<div class='shape overflow-hidden text-white'>
+		<svg viewBox='0 0 2880 48' fill='none' xmlns='http://www.w3.org/2000/svg'>
+			<path
+				d='M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z'
+				fill='currentColor'
+			></path>
+		</svg>
+	</div>
+</div>
+
+<section class='section'>
+
+	<div class='container'>
+    <a class="btn btn-success" href="/companies/my-company/jobs">Danh sách công việc đã đăng</a>
+		<div class='row justify-content-center'>
+			<div class='col-lg-10 col-md-7'>
+				<div class='card custom-form border-0'>
+					<div class='card-body'>
+						<form class='rounded shadow p-4' method='post' action="/jobs/create">
+							<div class='row'>
+								<div class='col-md-6'>
+									<div class='mb-3'>
+										<label class='form-label'>Tên công việc :<span
+												class='text-danger'
+											>*</span></label>
+										<div class='form-icon position-relative'>
+											<input
+												name='name'
+												id='name'
+												type='text'
+												class='form-control ps-5'
+												placeholder='UX UI developer'
+												value="{{form.name}}"
+											/>
+										</div>
+									</div>
+								</div><!--end col-->
+								<div class='col-md-6'>
+									<div class='mb-3'>
+										<label class='form-label'>Kinh nghiệm :</label>
+										<select
+											class='form-control custom-select'
+											name='yearsOfExperience'
+										>
+											{{#each yearsOfExperiences}}
+												<option value='{{@key}}' {{selected @key ../form.yearsOfExperiences}}>{{.}}</option>
+											{{/each}}
+										</select>
+									</div>
+								</div><!--end col-->
+								<div class='col-md-6'>
+									<div class='mb-3'>
+										<label class='form-label'>Giới tính :</label>
+										<div class='form-icon position-relative'>
+											<select
+												class='form-control custom-select'
+												name='gender'
+											>
+												<option value="male" {{selected 'male' ../form.gender}}>Nam</option>
+												<option value="female" {{selected 'female' ../form.gender}}>Nữ</option>
+												<option value="other" {{selected 'other' ../form.gender}}>Không yêu cầu</option>
+											</select>
+										</div>
+									</div>
+								</div><!--end col-->
+								<div class='col-md-6'>
+									<div class='mb-3'>
+										<label class='form-label'>Hình thức làm việc :<span
+												class='text-danger'
+											>*</span></label>
+										<select
+											class='form-control custom-select selectpicker'
+											id="work-type-picker"
+											name='workType[]'
+											multiple
+										>
+											{{#each workTypes}}
+												<option value='{{this.meta}}' {{selected meta ../form.techStack}}>{{this.displayName}}</option>
+											{{/each}}
+										</select>
+									</div>
+								</div><!--end col-->
+
+								<div class='col-md-12'>
+									<div class='mb-3'>
+										<label class='form-label'>Vị trí :<span
+												class='text-danger'
+											>*</span></label>
+										<select
+											class='form-control custom-select selectpicker'
+											id="position-picker"
+											name='positions[]'
+											multiple
+										>
+											{{#each positions}}
+												<option value='{{meta}}' {{selected meta ../form.positions}}>{{name}}</option>
+											{{/each}}
+										</select>
+									</div>
+								</div><!--end col-->
+
+								<div class='col-md-12'>
+									<div class='mb-3'>
+										<label class='form-label'>Kĩ năng :<span
+												class='text-danger'
+											>*</span></label>
+										<select
+											class='form-control custom-select selectpicker'
+											id="skills-picker"
+											name='skills[]'
+											multiple
+										>
+											{{#each skills}}
+												<option value='{{meta}}' {{selected meta ../form.skills}}>{{name}}</option>
+											{{/each}}
+										</select>
+									</div>
+								</div><!--end col-->
+
+								<div class='col-md-12'>
+									<div class='mb-3'>
+										<label class='form-label'>Nơi làm việc :<span
+												class='text-danger'
+											>*</span></label>
+										{{#each locations}}
+											<div>
+												<optgroup label="{{provinceDisplay @key}}"></optgroup>
+												{{#checkboxes @key .}}{{/checkboxes}}
+											</div>
+										{{/each}}
+										
+									</div>
+								</div><!--end col-->								
+
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class='form-label'>Mức lương :<span
+												class='text-danger'
+											>*</span></label>
+										<div>
+											<div class="form-check form-check-inline">
+												<input class="form-check-input" type="radio" id="deal" value="deal" name="salary">
+												<label class="form-check-label" for="deal">Thỏa thuận</label>
+											</div>
+											<div class="form-check form-check-inline">
+												<input class="form-check-input" type="radio" id="real-salary" name="salary">
+												<label class="form-check-label" for="real-salary">Nhập lương</label>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-md-6 salary-input">
+									<div class="mb-3">
+										<label class='form-label'>Lương :<span
+												class='text-danger'
+											>*</span></label>
+										<div class='form-icon position-relative'>
+											<input
+												id='salary-input'
+												type='text'
+												class='form-control ps-5'
+												placeholder='2000000'
+											/>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-md-6 salary-input">
+									<div class="mb-3">
+										<label class='form-label'>Đơn vị :<span
+												class='text-danger'
+											>*</span></label>
+										<select
+											class='form-control custom-select'
+											name='currency'
+										>
+											<option value="" selected>Chọn đơn vị</option>
+											<option value="vnd">VND</option>
+											<option value="usd">USD</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class='form-label'>Hạn nộp hồ sơ :<span
+												class='text-danger'
+											>*</span></label>
+										<div class='form-icon position-relative'>
+											<input
+												id='salary-input'
+												type='date'
+												name="dueTo"
+												class='form-control ps-5'
+												value="{{form.dueTo}}"
+											/>
+										</div>
+									</div>
+								</div>
+
+								<div class='col-md-12'>
+									<div class='mb-3'>
+										<label class='form-label'>Giới thiệu công việc :<span
+												class='text-danger'
+											>*</span></label>
+										<div class='form-icon position-relative'>
+											<textarea
+												name='briefDescription'
+												id="job-introduction-editor"
+											>{{form.briefDescription}}</textarea>
+										</div>
+									</div>
+								</div><!--end col-->
+
+								<div class='col-md-12'>
+									<div class='mb-3'>
+										<label class='form-label'>Mô tả :<span
+												class='text-danger'
+											>*</span></label>
+										<div class='form-icon position-relative'>
+											<textarea
+												name='details'
+												id='editor'
+											>{{form.details}}</textarea>
+										</div>
+									</div>
+								</div><!--end col-->
+
+								<div class='col-md-12'>
+									<div class='mb-3'>
+										<label class='form-label'>Yêu cầu :<span
+												class='text-danger'
+											>*</span></label>
+										<div class='form-icon position-relative'>
+											<textarea
+												name='requirements'
+												id='job-requirement-editor'
+											>{{form.requirements}}</textarea>
+										</div>
+									</div>
+								</div><!--end col-->
+
+								{{#if flash}}
+									{{#if flash.isFormError}}
+										<div class='col-lg-12'>
+											<div class='mb-3 text-danger'>
+												{{#each flash.message}}
+													<span>{{.}}<span/><br/>
+												{{/each}}
+											</div>
+										</div><!--end col-->
+									{{/if}}
+								{{/if}}
+
+								
+							</div><!--end row-->
+							<div class='row'>
+								<div class='col-sm-12'>
+									<input
+										type='submit'
+										class='submitBnt btn btn-primary'
+										value='Đăng ngay'
+									/>
+								</div><!--end col-->
+							</div><!--end row-->
+
+							
+						</form><!--end form-->
+					</div>
+				</div><!--end custom-form-->
+			</div>
+		</div>
+	</div><!--end container-->
+</section>

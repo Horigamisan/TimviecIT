@@ -1,0 +1,130 @@
+<section class='bg-half bg-light d-table w-100'>
+	<div class='container'>
+		<div class='row justify-content-center'>
+			<div class='col-lg-12 text-center'>
+				<div class='page-next-level'>
+					<h4 class='title'> Danh sách công việc của công ty </h4>
+					<div class='page-next'>
+						<nav aria-label='breadcrumb' class='d-inline-block'>
+							<ul class='breadcrumb bg-white rounded shadow mb-0'>
+								<li class='breadcrumb-item'><a href='/'>Trang chủ</a></li>
+								<li class='breadcrumb-item'><a
+										href='/companies/{{isEmployer.meta}}'
+									>{{isEmployer.name}}</a></li>
+								<li class='breadcrumb-item active' aria-current='page'>Danh sách công việc</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+			<!--end col-->
+		</div><!--end row-->
+	</div>
+	<!--end container-->
+</section><!--end section-->
+
+<div class='position-relative'>
+	<div class='shape overflow-hidden text-white'>
+		<svg viewBox='0 0 2880 48' fill='none' xmlns='http://www.w3.org/2000/svg'>
+			<path
+				d='M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z'
+				fill='currentColor'
+			></path>
+		</svg>
+	</div>
+</div>
+
+<section class="section">
+    <div class="container my-3">
+    <a class="btn btn-success" href="/companies/my-company/recruitment">Đăng tuyển</a>
+        <h4 class="my-5 text-primary text-center text-uppercase">Danh sách công việc</h4>
+        <table class="table table-striped border">
+            <thead>
+            <tr>
+                <th>STT</th>
+                <th>Tên công việc</th>
+                <th>Ngày hết hạn</th>
+                <th>Số người ứng tuyển</th>
+                <th>Thao tác</th>
+            </tr>
+            </thead>
+            <tbody>
+                {{#each jobs}}
+                    <tr>
+                        <td>{{@index}}</td>
+                        <td><a href="/jobs/{{meta}}-{{_id}}">{{name}}</a></td>
+                        <td>{{formatDate dueTo 'YYYY-MM-DD'}}</td>
+                        <td>{{totalApplyForms}}</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-danger remove-btn" data-toggle='modal'
+                                data-target='#remove-modal'
+                                data-id='{{_id}}' data-name="{{name}}">Xóa</button>
+                            <a href="/companies/my-company/{{meta}}-{{_id}}" class="btn btn-sm btn-outline-primary">Xem chi tiết</a>
+                            <a href="/companies/my-company/{{meta}}-{{_id}}/candidates" class="btn btn-sm btn-outline-success">Xem danh sách ứng viên</a>
+                        </td>
+                    </tr>
+                </div>
+                {{else}}
+                    <p>Chưa có công việc nào!</p>
+                {{/each}}
+            </tbody>
+        </table>
+
+        {{#if jobs}}
+            <!-- PAGINATION START -->
+                <div class='col-12'>
+                {{> pagination
+                    paginationClass="pagination mb-0"
+                    hasPreviousPage=hasPreviousPage
+                    previousPage=previousPage
+                    showStartEllipsis=showStartEllipsis
+                    pages=pages
+                    baseUrl=baseUrl
+                    hasNextPage=hasNextPage
+                    nextPage=nextPage
+                }}
+            </div><!--end col-->
+            <!-- PAGINATION END -->
+        {{/if}}
+    </div>
+</section>
+
+
+
+
+<!-- Confirm delete -->
+<div class='modal' tabindex='-1' role='dialog' id='remove-modal'>
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Cảnh báo</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          Bạn có chắc rằng muốn xóa <strong class='name-to-remove'></strong> khỏi danh sách yêu thích?
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <form action='' method='post' class='confirm-remove'>
+          <button type="submit" class="btn btn-danger">Xóa</button>
+            </form>
+          <button type="button" class="btn btn-dark" data-dismiss="modal">Đóng</button>
+        </div>
+        
+      </div>
+    </div>
+</div>
+
+<script>
+	$('.remove-btn').click(function () { const id = $(this).data('id'); const name = $(this).data('name');
+	$('.name-to-remove').text(name); $('.confirm-remove').attr('action', '/jobs/' +
+	id + '/remove'); });
+</script>
+
+
+

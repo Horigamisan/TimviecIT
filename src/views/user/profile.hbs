@@ -1,0 +1,293 @@
+<section
+	class='bg-half-260 d-table w-100'
+	style="background: url('images/job/candidate.jpg');"
+>
+	<div class='bg-overlay'></div>
+</section><!--end section-->
+<!-- Hero End -->
+<!-- Candidate Detail Start -->
+<section class='section'>
+	<div class='container'>
+		<form class='row profile' method="post" id="user-profile" enctype="multipart/form-data">
+			<div class='col-lg-4 col-md-5 col-12'>
+				<div class='card job-profile shadow border-0'>
+					<div class='text-center py-5 border-bottom rounded-top'>
+						<img
+							src='{{candidate.avatar}}'
+							class='avatar avatar-medium mx-auto rounded-circle shadow read-only'
+							alt=''
+						/>
+
+						<img src="{{candidate.avatar}}" id="preview-img" class='avatar avatar-medium mx-auto rounded-circle shadow  editable-field'
+							style="cursor: pointer;"
+						>
+						<input type="file" name="avatar" id="image-input" accept="image/*" style="display: none;">
+						<h5 class='mt-3 mb-0 read-only'>{{candidate.name}}</h5>
+						<input type="text" name="name" value="{{candidate.name}}" class="editable-field">
+
+						<p class='text-muted mb-0 read-only'>{{candidate.jobTitle}}</p>
+						<input type="text" name="jobTitle" value="{{candidate.jobTitle}}" class="editable-field">
+					</div>
+					<div class='card-body'>
+						<h5 class='card-title'>Thông tin cá nhân :</h5>
+
+						<ul class='list-unstyled'>
+							<li class='h6'><i
+									data-feather='mail'
+									class='fea icon-sm text-warning me-3 mr-2'
+								></i><span class='text-muted'>Email :</span>
+								<span class="read-only">{{candidate.email}}</span>
+								<input type="text" name="email" value="{{candidate.email}}" class="editable-field" disabled>
+							</li>
+							<li class='h6'><i
+									data-feather='home'
+									class='fea icon-sm text-warning me-3 mr-2'
+								></i><span class='text-muted'>Địa chỉ :</span>
+								<span class="read-only">{{candidate.address}}</span>
+								<input type="text" name="address" value="{{candidate.address}}" class="editable-field">
+							<li class='h6'>
+								<i
+									data-feather='globe'
+									class='fea icon-sm text-warning me-3 mr-2'
+								></i><span class='text-muted'>Quốc gia :</span>
+								<span class="read-only">{{candidate.nationality}}</span>
+								<input type="text" name="nationality" value="{{candidate.nationality}}" class="editable-field">
+							</li>
+							<li class='h6'><i
+									data-feather='phone'
+									class='fea icon-sm text-warning me-3 mr-2'
+								></i><span class='text-muted'>Điện thoại :</span>
+								<span class="read-only">{{candidate.phone}}</span>
+								<input type="text" name="phone" value="{{candidate.phone}}" class="editable-field" disabled>
+							</li>
+							<li class='h6'>
+								<i
+									data-feather='phone'
+									class='fea icon-sm text-warning me-3 mr-2'
+								></i><span class='text-muted'>Ngày sinh :</span>
+								<span class="read-only">{{candidate.birthday}}</span>
+								<input type="date" name="birthday" value="{{candidate.birthday}}" class="editable-field">
+							</li>
+							<li class="h6"><is
+									data-feather='globe'
+									class='fea icon-sm text-warning me-3 mr-2'
+								></is><span class='text-muted'>Mạng xã hội :</span>
+							</li>
+							<li>
+								<ul class='list-unstyled social-icon mb-0 mt-2 mr-2 read-only'>
+									{{#each candidate.socials}}
+										<li class='list-inline-item'>
+											<a
+												href='{{link}}'
+												target="_blank"
+												class='rounded d-flex justify-content-center align-items-center'
+											>
+												<i data-feather='{{platform}}' class='fea icon-sm fea-social'></i>
+											</a>
+										</li>
+									{{/each}}
+								</ul><!--end icon-->
+
+								<button type="button" id="add-social" class="editable-field">add</button>
+								<ul class='list-unstyled social-icon mb-0 mt-2 mr-2 editable-field social-list'>
+									{{#each candidate.socials}}
+										<li class='list-inline-item'>
+											<select name="socials[{{@index}}][platform]">
+												<option value="facebook" {{selected platform 'facebook'}}>facebook</option>
+												<option value="github" {{selected platform 'github'}}>github</option>
+												<option value="instagram" {{selected platform 'instagram'}} >instagram</option>
+											</select>
+
+											<input type="text" value="{{link}}" name="socials[{{@index}}][link]" />
+											<button type="button" class="delete-social">delete</button>
+										</li>
+									{{/each}}
+								</ul><!--end icon-->
+							</li>
+						</ul>
+
+						{{#if isOwner}}
+							<div class='d-grid'>
+								<button
+									class='btn btn-primary toggle-edit-mode-btn read-only'
+									type="button"
+								>
+									Chỉnh sửa thông tin
+								</button>
+
+								<button
+									class='btn btn-danger toggle-edit-mode-btn editable-field'
+									type="button"
+								>
+									Hủy
+								</button>
+							</div>
+						{{/if}}
+					</div>
+				</div>				
+			</div><!--end col-->
+
+			<div class='col-lg-8 col-md-7 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0'>
+				<div class='ms-lg-4'>
+					<h4>Mục tiêu nghề nghiệp :</h4>
+					<p class='text-muted read-only'>{{candidate.ambition}}</p>
+					<textarea name="ambition" rows="3" class="editable-field">{{candidate.ambition}}</textarea>
+
+					<h4 class='mt-lg-5 mt-4'>Trình độ học vấn : <button class="editable-field" id="add-edu" type="button">Thêm</button></h4>
+					<div class='row read-only'>
+						{{#each candidate.education}}
+							<div class='col-lg-12 mt-4 pt-2'>
+								<div class='d-flex'>
+									<div class='company-logo text-muted h6 me-3 text-center mr-5'>
+										<span>{{start}}</span>
+										-
+										<span>{{end}}</span>
+									</div>
+									<div class='flex-1'>
+										<h5 class='title mb-0'>{{university}}</h5>
+										<small
+											class='text-muted company-university'
+										>{{major}}</small>
+										<p class='text-muted mt-2 mb-0'>{{degree}}</p>
+									</div>
+								</div>
+							</div>
+						{{/each}}
+					</div>
+
+					<div class='row editable-field edu-list'>
+						{{#each candidate.education}}
+							<div class='col-lg-12 mt-4 pt-2'>
+								<div class='d-flex'>
+									<div class='company-logo text-muted h6 me-3 text-center mr-5'>
+										<input type="text" name="education[{{@index}}][start]" value="{{start}}">
+										-
+										<input type="text" name="education[{{@index}}][end]" value="{{end}}">
+									</div>
+									<div class='flex-1'>
+										<input type="text" name="education[{{@index}}][university]" value="{{university}}">
+										<input type="text" name="education[{{@index}}][major]" value="{{major}}">
+										<input type="text" name="education[{{@index}}][degree]" value="{{degree}}">
+									</div>
+									<button type="button" class="delete-edu">delete</button>
+								</div>
+							</div>
+						{{/each}}
+					</div>
+
+					{{! Skill }}
+					<h4 class='mt-lg-5 mt-4'>Các kỹ năng :</h4>
+
+					<div class='row pt-2 read-only'>
+						{{#each candidate.skills}}
+							<a href="/jobs?skills={{.}}" class='mx-2 skill-item'>{{skillDisplayName .}}</a>
+						{{/each}}
+					</div>
+
+					<div class="row pt-2 editable-field">
+						<select name="skills[]" id="skills" class="selectpicker" multiple>
+							{{#each skills}}
+								<option value="{{meta}}" {{selected meta ../candidate.skills}}>{{name}}</option>
+							{{/each}}
+						</select>
+					</div>
+
+					{{! English }}
+					<h4 class='mt-lg-5 mt-4'>Trình độ ngoại ngữ :</h4>
+					<p class='text-muted read-only'>Ielts 6.0</p>
+					<input type="text" class="editable-field" value="{{candidate.english}}" name="english">
+
+					<h4 class='mt-lg-5 mt-4'>Kinh nghiệm : <button type="button" id="add-experience" class="editable-field">add</button></h4>
+					<div class='row read-only'>
+						{{#each candidate.experience}}
+							<div class='col-lg-12 mt-4 pt-2'>
+								<div class='d-flex'>
+									<div class='company-logo text-muted h6 me-3 text-center mr-5'>
+										<span>{{start}}</span>
+										-
+										<span>{{end}}</span>
+									</div>
+									<div class='flex-1'>
+										<h5 class='title mb-0'>{{position}}</h5>
+										<small
+											class='text-muted company-university'
+										>{{company}}</small>
+										<p class='text-muted mt-2 mb-0'>{{description}}</p>
+									</div>
+								</div>
+							</div>
+						{{/each}}
+					</div><!--end row-->
+
+					<ul class='row editable-field experience-list'>
+						{{#each candidate.experience}}
+							<li class='col-lg-12 mt-4 pt-2'>
+								<div class='d-flex'>
+									<div class='company-logo text-muted h6 me-3 text-center mr-5'>
+										<input type="text" name="experience[{{@index}}][start]" value="{{start}}">
+										-
+										<input type="text" name="experience[{{@index}}][end]" value="{{end}}">
+									</div>
+									<div class='flex-1'>
+										<input type="text" name="experience[{{@index}}][job]" value="{{job}}">
+										<input type="text" name="experience[{{@index}}][company]" value="{{company}}">
+										<input type="text" name="experience[{{@index}}][description]" value="{{description}}">
+									</div>
+									<button type="button" class="delete-experience">xóa</button>
+								</div>
+							</li>
+						{{/each}}
+					</ul><!--end row-->
+					<!-- Experience End -->
+					<!-- Start Projects Work -->
+					<h4 class='mt-lg-5 mt-4'>Projects : <button type="button" id="add-project" class="editable-field">add</button></h4>
+					<ul class='row read-only'>
+						{{#each candidate.projects}}
+							<li class='col-md-6 col-12 mt-4 pt-2'>
+								<div class='card border-0 work-container work-classic'>
+									<div class='card-body p-0'>
+										<div class='content pt-3'>
+											<h5 class='mb-0'><a
+													href='portfolio-detail-one.html'
+													class='text-dark title'
+												>{{name}}</a></h5>
+											<h6 class='text-muted tag mb-0'>{{description	}}</h6>
+											<div class='project-info pt-2'>
+												<span class='pt-2'>Source code:
+													<a href="{{source}}" target="_blank">{{source}}</a></span><br />
+												<span>Demo: <a href="{{demo}}" target="_blank">{{demo}}</a></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li><!--end col-->
+						{{/each}}
+					</ul><!--end row-->
+
+					<ul class='row editable-field project-list'>
+						{{#each candidate.projects}}
+							<li class='col-md-6 col-12 mt-4 pt-2'>
+								<div class='card border-0 work-container work-classic'>
+									<div class='card-body p-0'>
+										<div class='content pt-3'>
+											<input type="text" name="projects[{{@index}}][name]" value="{{name}}">
+											<textarea name="projects[{{@index}}][description]" rows="2">{{description}}</textarea>
+											<input type="text" name="projects[{{@index}}][source]" value="{{source}}">
+											<input type="text" name="projects[{{@index}}][demo]" value="{{demo}}">
+										</div>
+									</div>
+									<button type="button" class="delete-project">delete</button>
+								</div>
+							</li><!--end col-->
+						{{/each}}
+					</ul><!--end row-->
+					<!-- End Projects Work -->
+
+					<div class='mt-4 pt-2 editable-field'>
+						<button type="submit" class='btn btn-outline-primary'>Lưu</button>
+					</div>
+				</div>
+			</div><!--end col-->
+		</form><!--enn row-->
+	</div><!--end container-->
+</section><!--end section-->

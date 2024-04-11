@@ -1,0 +1,284 @@
+<section class='bg-half-170 pb-0 bg-light d-table w-100'>
+	<div class='container'>
+		<div class='row justify-content-center'>
+			<div class='col-lg-10'>
+				<div class='title-heading text-center mt-4 mt-md-5 pt-md-5'>
+					<div class='alert alert-light alert-pills' role='alert'>
+						<span class='badge rounded-pill bg-success me-1'>Bắt đầu</span>
+						<span class='content'>
+							<a href='page-job-apply.html' class='text-primary'>Ứng tuyển</a>
+							ngay !</span>
+					</div>
+					<h1 class='heading mb-3'>Tuyển Dụng
+						<span
+							class='text-primary typewrite'
+							data-period='2000'
+							data-type='[ "Freelancer", "Developer", "Designer", "UX Developer", "ios Developer" ]'
+						> 
+							<span class='wrap'></span> 
+						</span>
+					</h1>
+					
+					<form class='rounded p-4 mt-4 bg-white' action="/jobs" method="get" id="filter-form">
+						<div class='row text-start'>
+							<div class='col-lg-5 col-md-4'>
+								<div class='mb-0'>
+									<input
+										type='text'
+										class='form-control search-box'
+										placeholder='Từ khóa'
+										name="search"
+										id="search-box"
+									/>
+								</div>
+							</div><!--end col-->
+
+							<div class='col-lg-7 col-md-8'>
+								<div class='row align-items-center'>
+									<div class='col-md-4 mt-4 mt-sm-0'>
+										<div class='mb-0'>
+											<select class='form-control custom-select' name="locations" id="location-box">
+												<option value="" selected=''>Địa điểm</option>
+												{{#each provinces}}
+													<option value='{{meta}}'>{{name}}</option>
+												{{/each}}
+											</select>
+										</div>
+									</div><!--end col-->
+
+									<div class='col-md-4 mt-4 mt-sm-0'>
+										<div class='mb-0'>
+											<select class='form-control custom-select' name="positions" id="position-box">
+												<option value='' selected=''>Vị trí</option>
+												{{#each positions}}
+													<option  value='{{meta}}'>{{name}}</option>
+												{{/each}}
+											</select>
+										</div>
+									</div><!--end col-->
+
+									<div class='col-md-4 mt-4 mt-sm-0'>
+										<div class='d-grid'>
+											<input
+												type='submit'
+												class='searchbtn btn btn-primary'
+												value='Tìm kiếm'
+											/>
+										</div>
+									</div><!--end col-->
+								</div><!--end row-->
+							</div>
+							<!----->
+						</div><!--end row-->
+					</form>
+				</div>
+			</div><!--end col-->
+
+			<div class='col-12 mt-4 pt-3'>
+				<img src='/images/banner.png' class='img-fluid' alt='' />
+			</div><!--end col-->
+		</div><!--end row-->
+	</div><!--end container-->
+</section>
+
+<div class='position-relative'>
+	<div class='shape overflow-hidden text-white'>
+		<svg viewBox='0 0 2880 48' fill='none' xmlns='http://www.w3.org/2000/svg'>
+			<path
+				d='M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z'
+				fill='currentColor'
+			></path>
+		</svg>
+	</div>
+</div>
+
+<section class='section'>
+	<div class='container'>
+		<div class='row justify-content-center'>
+			<div class='col-12 text-center'>
+				<div class='section-title mb-4 pb-2'>
+					<h4 class='title mb-4 text-capitalize'>Khám phá</h4>
+				</div>
+			</div><!--end col-->
+		</div><!--end row-->
+
+		<div class='row'>
+			{{#each workTypes}}
+				<div class='col-lg-3 col-md-6 col-12 mt-4 pt-2 clickable'>
+					<div class='card categories overflow-hidden rounded shadow border-0'>
+						<a href='/jobs?work_type={{meta}}'>
+							<img src='{{image}}' class='img-fluid' alt='' />
+							<div class='card-body'>
+								<ul
+									class='list-unstyled d-flex justify-content-between mb-0 text-dark'
+								>
+									<li class='title h6'>{{displayName}}</li>
+									<li class='h6 mb-0 jobs'>{{quantity}} công việc</li>
+								</ul>
+							</div>
+						</a>
+					</div>
+				</div>
+			{{/each}}
+		</div><!--end row-->
+	</div><!--end container-->
+	<!-- Companies Start -->
+	<div class='container mt-100 mt-60'>
+		<div class='row justify-content-center'>
+			<div class='col-12 text-center'>
+				<div class='section-title mb-4 pb-2'>
+					<h4 class='title mb-4 text-capitalize'>Việc làm phổ biến</h4>
+				</div>
+			</div><!--end col-->
+		</div><!--end row-->
+
+		<div class='row'>
+			{{#each jobs}}
+				<div class='col-lg-4 col-md-6 col-12 mt-4 pt-2'>
+					{{> jobItem job=. isAuth=../isAuth}}
+				</div>
+			{{else}}
+				<div class='col-12'>
+					<div class='alert alert-warning' role='alert'>
+						<strong>Không có công việc nào!</strong>
+					</div>
+				</div>
+			{{/each}}
+
+			<div class='col-12 text-center mt-4 pt-2'>
+				<a href='/jobs' class='btn btn-primary'>Xem thêm
+					<i class='uil uil-angle-right-b align-middle'></i></a>
+			</div>
+		</div><!--end row-->
+	</div><!--end container-->
+	<!-- Companies End -->
+	<!-- Candidates Start -->
+	<div class='container mt-100 mt-60'>
+		<div class='row justify-content-center'>
+			<div class='col-12 text-center'>
+				<div class='section-title mb-4 pb-2'>
+					<h4 class='title mb-4 text-capitalize'>nhà tuyển dụng nổi bật</h4>
+				</div>
+			</div><!--end col-->
+		</div><!--end row-->
+
+		<div class='row'>
+			<div class='col-12 mt-4 pt-2'>
+				<div class='tns-outer' id='tns1-ow'><div
+						class='tns-liveregion tns-visually-hidden'
+						aria-live='polite'
+						aria-atomic='true'
+					>slide <span class='current'>4 to 6</span> of 6</div><div
+						id='tns1-mw'
+						class='tns-ovh'
+					><div class='tns-inner' id='tns1-iw'><div
+								class='tiny-three-item tns-slider tns-carousel tns-subpixel tns-calc tns-horizontal'
+								id='tns1'
+								style='transform: translate3d(-50%, 0px, 0px);'
+							>
+								{{#each topCompanies}}
+									<div
+										class='tiny-slide tns-item'
+										id='tns1-item2'
+										aria-hidden='true'
+										tabindex='-1'
+									>
+										<div class='card client-testi border-0 text-center'>
+											<div class='card-body'>
+												<div class='position-relative'>
+													<img
+														src='{{logo}}'
+														class='img-fluid avatar avatar-ex-large rounded-circle shadow mb-2 object-fit-cover'
+														alt=''
+													/>
+													<div class='social-icon team-icon mb-0'>
+														<a
+															href='/companies/{{meta}}'
+															class='rounded btn btn-outline-primary'
+														>Xem hồ sơ</a>
+													</div><!--end icon-->
+												</div>
+												<div class='content pt-3 pb-3'>
+													<h5 class='mb-0'><a
+															href='/companies/{{meta}}'
+															class='name text-dark'
+														>{{name}}</a></h5>
+													<small class='designation text-muted'>
+														{{!-- {{#if }} --}}
+													</small>
+												</div>
+											</div>
+										</div>
+									</div>
+								{{/each}}
+								
+							</div></div></div></div>
+			</div><!--end col-->
+		</div>
+	</div><!--end container-->
+
+	<div class='container pt-5'>
+		<div class='row justify-content-center'>
+			<div class='col-lg-2 col-md-2 col-6 text-center'>
+				<img
+					src='/images/client/amazon.svg'
+					class='avatar avatar-ex-sm'
+					alt=''
+				/>
+			</div><!--end col-->
+
+			<div class='col-lg-2 col-md-2 col-6 text-center'>
+				<img
+					src='/images/client/google.svg'
+					class='avatar avatar-ex-sm'
+					alt=''
+				/>
+			</div><!--end col-->
+
+			<div class='col-lg-2 col-md-2 col-6 text-center mt-4 mt-sm-0'>
+				<img
+					src='/images/client/lenovo.svg'
+					class='avatar avatar-ex-sm'
+					alt=''
+				/>
+			</div><!--end col-->
+
+			<div class='col-lg-2 col-md-2 col-6 text-center mt-4 mt-sm-0'>
+				<img
+					src='/images/client/paypal.svg'
+					class='avatar avatar-ex-sm'
+					alt=''
+				/>
+			</div><!--end col-->
+
+			<div class='col-lg-2 col-md-2 col-6 text-center mt-4 mt-sm-0'>
+				<img
+					src='/images/client/shopify.svg'
+					class='avatar avatar-ex-sm'
+					alt=''
+				/>
+			</div><!--end col-->
+
+			<div class='col-lg-2 col-md-2 col-6 text-center mt-4 mt-sm-0'>
+				<img
+					src='/images/client/spotify.svg'
+					class='avatar avatar-ex-sm'
+					alt=''
+				/>
+			</div><!--end col-->
+		</div><!--end row-->
+	</div><!--end container-->
+	<!-- Testi end -->
+</section><!--end section-->
+<!-- End -->
+<!-- Shape Start -->
+<div class='position-relative'>
+	<div class='shape overflow-hidden text-light'>
+		<svg viewBox='0 0 2880 48' fill='none' xmlns='http://www.w3.org/2000/svg'>
+			<path
+				d='M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z'
+				fill='currentColor'
+			></path>
+		</svg>
+	</div>
+</div>

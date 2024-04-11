@@ -1,0 +1,67 @@
+<div class='key-feature p-3 rounded shadow'>
+	<div class='row d-flex justify-content-space-evenly px-2'>
+		<div class='col-3 d-flex justify-content-center align-items-center'>
+			<img
+				src='{{job.company.logo}}'
+				{{! src='/images/job/Codepen.svg' }}
+				class='avatar avatar-ex-sm'
+				alt='{{job.company.name}}'
+			/>
+		</div>
+
+		<div class='col-9 ellipsis'>
+			<a
+				href='/jobs/{{job.meta}}-{{job._id}}'
+				class='title mb-0 text-dark row hover-underline'
+			>
+				<span
+					data-toggle='tooltip'
+					data-placement='top'
+					data-html='true'
+					title='{{job.name}}'
+				>
+					{{job.name}}
+				</span>
+			</a>
+			<a
+				href='/companies/{{job.company.meta}}'
+				class='text-muted mb-0 row text-truncate'
+			>
+				<span
+					data-toggle='tooltip'
+					data-placement='bottom'
+					data-html='true'
+					title='{{job.company.name}}'
+				>
+					{{job.company.name}}
+				</span>
+			</a>
+		</div>
+	</div>
+
+	<div class='row d-flex p-3 w-100' style='justify-content: space-between;'>
+		<div>
+			<i
+				data-feather='dollar-sign'
+				class='fea icon-sm text-warning me-3 mb-1'
+			></i>
+			{{#if isAuth}}
+				<span>{{salaryDisplay job.salary}}
+					{{#if job.currency}}{{job.currency}}{{/if}}</span>
+			{{else}}
+				<a href='/auth/sign-in'>Đăng nhập để xem lương</a>
+			{{/if}}
+		</div>
+		<span class='text-primary'>{{formatTime job.updatedAt 1}}</span>
+	</div>
+
+	<div class='row d-flex px-3' style='justify-content: space-between;'>
+		<div class='d-flex' style='font-size: 12px'>
+			{{#skillTooltip job.skills 'skill-item mx-1'}}{{/skillTooltip}}
+		</div>
+		<div>
+
+			{{#locationTooltip job.locations 'mt-2'}}{{/locationTooltip}}
+		</div>
+	</div>
+</div>

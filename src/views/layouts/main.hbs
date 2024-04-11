@@ -1,0 +1,337 @@
+<html lang='en'>
+	<head>
+		<meta charset='utf-8' />
+		<title>Tìm việc IT - timviecit</title>
+		<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+		<link
+			rel='stylesheet'
+			href='https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.1.96/css/materialdesignicons.min.css'
+			integrity='sha512-NaaXI5f4rdmlThv3ZAVS44U9yNWJaUYWzPhvlg5SC7nMRvQYV9suauRK3gVbxh7qjE33ApTPD+hkOW78VSHyeg=='
+			crossorigin='anonymous'
+			referrerpolicy='no-referrer'
+		/>
+		<link
+			rel='stylesheet'
+			href='https://unicons.iconscout.com/release/v3.0.6/css/line.css'
+		/>
+		<link rel='stylesheet' href='/css/tiny-slider.css' />
+		<link
+			href='/css/style.min.css'
+			rel='stylesheet'
+			type='text/css'
+			id='theme-opt'
+		/>
+		<link href='/css/colors/default.css' rel='stylesheet' id='color-opt' />
+		<link
+			rel='stylesheet'
+			href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css'
+		/>
+		<script
+			src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js'
+		></script>
+		<script
+			src='https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js'
+		></script>
+		<script
+			src='https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js'
+		></script>
+		<link
+			rel='stylesheet'
+			href='https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css'
+		/>
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script
+			src='https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js'
+		></script>
+		<script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
+		<link rel='stylesheet' href='/css/index.css' />
+	</head>
+
+	<body>
+		<!-- Loader -->
+		<!-- <div id="preloader">
+        <div id="status">
+            <div class="spinner">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
+            </div>
+        </div>
+    </div> -->
+		<!-- Loader -->
+		<!-- Navbar STart -->
+		{{#if flash}}
+			{{#unless flash.isFormError}}
+				<div class='position-fixed left-0 m-3' style='z-index: 9999;'>
+					<div
+						id='myToast'
+						class='toast text-center custom-toast-color success'
+						style='width: 220px'
+						role='alert'
+						aria-live='assertive'
+						aria-atomic='true'
+						data-autohide='true'
+						data-delay='3000'
+					>
+						<div class='toast-header'>
+							<strong class='mr-auto'>{{flash.title}}</strong>
+							<button
+								type='button'
+								class='ml-2 mb-1 close'
+								data-dismiss='toast'
+								aria-label='Close'
+							>
+								<span aria-hidden='true'>&times;</span>
+							</button>
+						</div>
+						<div class='toast-body'>
+							{{#each flash.message}}
+								<span>{{.}}<span/>
+							{{/each}}
+						</div>
+					</div>
+				</div>
+			{{/unless}}
+		{{/if}}
+		<header id='topnav' class='defaultscroll sticky'>
+			<div class='container d-flex align-items-center justify-content-between'>
+				<!-- Logo container-->
+				<a class='logo' href='/'>
+					<h3 class='mt-2'>Timviecit</h3>
+				</a>
+
+				<div id='navigation'>
+					<!-- Navigation Menu-->
+					<ul class='navigation-menu'>
+						<li><a href='/' class='sub-menu-item'>Trang chủ</a></li>
+						<li><a href='/jobs' class='sub-menu-item'>Việc làm</a></li>
+						{{#if isEmployer}}
+							<li><a href='/companies/my-company/recruitment' class='sub-menu-item'>Tuyển dụng</a></li>
+						{{/if}}
+					</ul>
+					<!--end navigation menu-->
+
+					{{#if isAuth}}
+						<div class='buy-menu-btn d-none'>
+							<a href='/auth/sign-out' class='btn btn-primary'>Đăng xuất</a>
+						</div>
+					{{else}}
+						<div class='buy-menu-btn d-none'>
+							<a href='/auth/sign-in' class='btn btn-primary'>Đăng nhập</a>
+						</div>
+					{{/if}}
+					<!--end login button-->
+				</div>
+
+				{{#if isAuth}}
+				 	<div class="btn-group dropdown-primary">
+                        <a class='dropdown-toggle hidden-arrow d-flex align-items-center'
+							href='#'
+							id='navbarDropdownMenuLink'
+							role='button'
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+							style='gap: 10px'
+						>
+							 <img 
+							 	src='{{#if isEmployer}}{{isEmployer.logo}}{{else}}{{#if isCandidate}}{{isCandidate.avatar}}{{/if}}{{/if}}'
+								class='rounded-circle'
+								height='35'
+								alt=''
+								loading='lazy' 
+							/>
+
+                            <p class='my-0 text-truncate' style="max-width: 120px;">
+								{{#if isEmployer}}
+									{{isEmployer.name}}
+								{{else}}
+									{{#if isCandidate}}
+										{{isCandidate.name}}
+									{{/if}}
+								{{/if}}
+							</p>
+                           
+                        </a>
+                        <div class="dropdown-menu" style="line-height:1.5" aria-labelledby="navbarDropdownMenuLink">
+								{{#if isEmployer}}
+									<a class='dropdown-item' href='/companies/my-company'>Hồ sơ</a>
+								{{else}}
+									{{#if isCandidate}}
+										<a class='dropdown-item' href='/user/profile'>Hồ sơ</a>
+										<a href="/user/bookmarked-jobs" class="dropdown-item">Công việc yêu thích</a>
+										<a href="/user/applied-jobs" class="dropdown-item">Công việc đã ứng tuyển</a>
+									{{/if}}
+								{{/if}}
+								<li><hr class="dropdown-divider"></li>
+                            	<a class='dropdown-item' href='/auth/sign-out'>Đăng xuất</a>
+                        	</div>
+                    </div>
+				{{else}}
+					<a href='/auth/sign-in' class='btn btn-primary'>Đăng nhập</a>
+				{{/if}}
+				<!--end login button-->
+				<!-- End Logo container-->
+				<div class='menu-extras'>
+					<div class='menu-item'>
+						<!-- Mobile menu toggle-->
+						<a class='navbar-toggle' id='isToggle' onclick='toggleMenu()'>
+							<div class='lines'>
+								<span></span>
+								<span></span>
+								<span></span>
+							</div>
+						</a>
+						<!-- End mobile menu toggle-->
+					</div>
+				</div>
+
+				<!--end navigation-->
+			</div>
+			<!--end container-->
+		</header>
+		<!--end header-->
+		<!-- Navbar End -->
+		<!-- Hero Start -->
+		<div>{{{body}}}</div>
+		<!-- Footer Start -->
+		<footer class='footer bg-light'>
+			<div class='container'>
+				<div class='row'>
+					<div class='col-lg-5 col-12 mb-0 mb-md-4 pb-0 pb-md-2'>
+						<a href='/' class='logo-footer'>
+							<h3>Timviecit</h3>
+						</a>
+						<p class='mt-4 text-muted'>
+							Hàng ngàn công việc hấp dẫn đang chờ đợi bạn!
+						</p>
+						<ul class='list-unstyled social-icon social mb-0 mt-4'>
+							<li class='list-inline-item'>
+								<a
+									href='javascript:void(0)'
+									class='rounded align-icon-center'
+								><i
+										data-feather='facebook'
+										class='fea icon-sm fea-social'
+									></i></a>
+							</li>
+							<li class='list-inline-item'>
+								<a
+									href='javascript:void(0)'
+									class='rounded align-icon-center'
+								><i
+										data-feather='instagram'
+										class='fea icon-sm fea-social'
+									></i></a>
+							</li>
+							<li class='list-inline-item'>
+								<a
+									href='javascript:void(0)'
+									class='rounded align-icon-center'
+								><i
+										data-feather='twitter'
+										class='fea icon-sm fea-social'
+									></i></a>
+							</li>
+							<li class='list-inline-item'>
+								<a
+									href='javascript:void(0)'
+									class='rounded align-icon-center'
+								><i
+										data-feather='linkedin'
+										class='fea icon-sm fea-social'
+									></i></a>
+							</li>
+						</ul>
+						<!--end icon-->
+					</div>
+					<!--end col-->
+
+					<div class='col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0'>
+						<h5 class='text-dark footer-head'>Việc Làm</h5>
+						<ul class='list-unstyled footer-list mt-4'>
+							<li>
+								<a href='/jobs' class='text-muted'><i
+										class='uil uil-angle-right-b me-1'
+									></i>
+									Tìm việc</a>
+							</li>
+							{{#if isEmployer}}
+								<li>
+									<a href='/employer/post-job' class='text-muted'><i
+											class='uil uil-angle-right-b me-1'
+										></i>
+										Đăng tuyển</a>
+								</li>
+							{{/if}}
+						</ul>
+					</div>
+					<!--end col-->
+
+					<div class='col-lg-4 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0'>
+						<h5 class='text-dark footer-head'>Nhận tin tuyển dụng</h5>
+						<p class='mt-4 text-muted'>
+							Đăng ký và nhận thông tin tuyển dụng sớm nhất từ chúng tôi.
+						</p>
+						<form method='post' action='/register-to-get-news'>
+							<div class='row'>
+								<div class='col-lg-12'>
+									<div class='foot-subscribe foot-white mb-3'>
+										<label class='text-muted form-label'>Điền email của bạn<span
+												class='text-danger'
+											>*</span></label>
+										<div class='form-icon position-relative'>
+											<input
+												type='email'
+												id='emailsubscribe'
+												class='form-control bg-light border ps-5 rounded'
+												placeholder='Email : '
+												required
+											/>
+										</div>
+									</div>
+								</div>
+								<div class='col-lg-12'>
+									<div class='d-grid'>
+										<input
+											type='submit'
+											id='submitsubscribe'
+											class='btn btn-primary'
+											value='Đăng ký'
+										/>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<!--end col-->
+				</div>
+				<!--end row-->
+			</div>
+			<!--end container-->
+		</footer>
+		<p class='text-center' style='margin-top: 5px'>&copy; Copy right -
+			<strong>TDTU Timviecit</strong>
+			{{getYear 'yyyy'}}</p>
+
+		<!--end footer-->
+		<!-- Back to top -->
+		<a
+			href='#'
+			onclick='topFunction()'
+			id='back-to-top'
+			class='btn btn-icon btn-primary back-to-top align-icon-center'
+		><i data-feather='arrow-up' class='icons'></i></a>
+		<!-- Back to top -->
+
+		<!-- SLIDER -->
+		<script src='/js/tiny-slider.js'></script>
+		<!-- Icons -->
+		<script src='/js/feather.min.js'></script>
+		<!-- Switcher -->
+		<script src='/js/switcher.js'></script>
+		<!-- Main Js -->
+		<script src='/js/plugins.init.js'></script>
+		<!--Note: All init js like tiny slider, counter, countdown, maintenance, lightbox, gallery, swiper slider, aos animation etc.-->
+		<script src='/js/app.js'></script>
+
+	</body>
+</html>

@@ -1,0 +1,93 @@
+/* .image-preview {
+	width: 50px;
+	height: 50px;
+}
+
+.image-preview img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+} */
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+.align-icon-center {
+	display: flex !important;
+	align-items: center;
+	justify-content: center;
+}
+
+.clickable {
+	cursor: pointer;
+}
+
+.hover-change-color:hover {
+	border: 1px solid #007bff;
+	color: #007bff;
+}
+
+.ellipsis {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.skill-item {
+	border-radius: 10px;
+	border: 1px solid black;
+	padding: 3px 6px;
+}
+
+.multiselect-container {
+	max-height: 200px; /* Change this value to set your desired maximum height */
+	width: 100%;
+	overflow-y: auto;
+}
+
+.custom-toast-color.success {
+	background-color: #5bf37e !important;
+}
+
+.custom-toast-color.success .toast-body {
+	background-color: #96dba6 !important;
+}
+
+.custom-toast-color.danger {
+	background-color: #e46e59 !important;
+}
+
+.custom-toast-color.danger .toast-body {
+	background-color: #ea8674 !important;
+}
+
+.profile .editable-field {
+	display: none;
+}
+
+.profile .read-only {
+	display: block;
+}
+
+.profile.edit-mode .read-only {
+	display: none;
+}
+
+.profile.edit-mode .editable-field {
+	display: block;
+}
+
+.profile.edit-mode .ck-editor {
+	display: block;
+}
+
+.profile .ck-editor {
+	display: none;
+}
+
+.flex.read-only {
+	display: flex;
+}

@@ -1,0 +1,91 @@
+<section class="section">
+    <div class="container my-3">
+        <h4 class="my-5 text-primary text-center text-uppercase">Danh sách công việc yêu thích</h4>
+        <table class="table table-striped border">
+            <thead>
+            <tr>
+                <th>STT</th>
+                <th>Tên công việc</th>
+                <th>Tên công ty</th>
+                <th>Ngày hết hạn</th>
+                <th>Thao tác</th>
+            </tr>
+            </thead>
+            <tbody>
+                {{#each bookmark}}
+                    <tr>
+                        <td>{{@index}}</td>
+                        <td><a href="/jobs/{{meta}}-{{_id}}">{{name}}</a></td>
+                        <td><a href="/companies/{{company.meta}}">{{company.name}}</a></td>
+                        <td>{{formatDate dueTo 'YYYY-MM-DD'}}</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-danger remove-btn" data-toggle='modal'
+                                data-target='#remove-modal'
+                                data-id='{{_id}}' data-name="{{name}}">Xóa</button>
+                        </td>
+                    </tr>
+                </div>
+                {{else}}
+                    <p>Chưa có công việc yêu thích nào!</p>
+                {{/each}}
+            </tbody>
+        </table>
+
+        {{#if bookmark}}
+            <!-- PAGINATION START -->
+                <div class='col-12'>
+                {{> pagination
+                    paginationClass="pagination mb-0"
+                    hasPreviousPage=hasPreviousPage
+                    previousPage=previousPage
+                    showStartEllipsis=showStartEllipsis
+                    pages=pages
+                    baseUrl=baseUrl
+                    hasNextPage=hasNextPage
+                    nextPage=nextPage
+                }}
+            </div><!--end col-->
+            <!-- PAGINATION END -->
+        {{/if}}
+    </div>
+</section>
+
+
+
+
+<!-- Confirm delete -->
+<div class='modal' tabindex='-1' role='dialog' id='remove-modal'>
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Cảnh báo</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          Bạn có chắc rằng muốn xóa <strong class='name-to-remove'></strong> khỏi danh sách yêu thích?
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <form action='' method='post' class='confirm-remove'>
+          <button type="submit" class="btn btn-danger">Xóa</button>
+            </form>
+          <button type="button" class="btn btn-dark" data-dismiss="modal">Đóng</button>
+        </div>
+        
+      </div>
+    </div>
+</div>
+
+<script>
+	$('.remove-btn').click(function () { const id = $(this).data('id'); const name = $(this).data('name');
+	$('.name-to-remove').text(name); $('.confirm-remove').attr('action', '/jobs/' +
+	id + '/unbookmark'); });
+</script>
+
+
+

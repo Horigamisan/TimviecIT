@@ -1,0 +1,15 @@
+module.exports = [
+	'_id',
+	'name',
+	'meta',
+	'salary',
+	'currency',
+	'skills',
+	'workType',
+	'locations',
+	'updatedAt',
+	'company._id',
+	'company.name',
+	'company.logo',
+	'company.meta',
+];

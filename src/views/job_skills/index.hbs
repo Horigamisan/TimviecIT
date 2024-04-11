@@ -1,0 +1,120 @@
+<h1>Các kĩ năng hiện có trên hệ thống</h1>
+
+<a href="/job_skills/add" class="btn btn-success mb-3">Thêm kỹ năng</a>
+
+<table class="table table-striped" id="job-skill-table">
+    <thead class="thead-dark">
+        <tr>
+            <th>Tên kĩ năng</th>
+            <th>Meta</th>
+            <th>Tùy chọn</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each skills}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{meta}}</td>
+                <td>
+                    <button 
+                        class="btn btn-sm btn-outline-primary edit-job-skill-btn" 
+                        data-toggle="modal" 
+                        data-target='#edit-job-skills-modal' 
+                        data-skill='{"id": "{{_id}}", "name": "{{name}}", "meta": "{{meta}}"}'
+                    >
+                        Chỉnh Sửa
+                    </button>
+                    <button 
+                        class="btn btn-sm btn-outline-danger remove-job-skill-btn" data-toggle='modal'
+						data-target='#remove-job-skill-modal'
+						data-id='{{_id}}' 
+                        data-name="{{name}}"
+                    >
+                        Xóa
+                    </button>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<!-- Confirm delete -->
+<div class='modal' tabindex='-1' role='dialog' id='remove-job-skill-modal'>
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Xóa kĩ năng</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          Bạn có chắc rằng muốn xóa <strong id='job-skill-to-remove'></strong>?
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <form action='' method='post' id='confirm-remove-skill'>
+          <button type="submit" class="btn btn-danger">Xóa</button>
+            </form>
+          <button type="button" class="btn btn-dark" data-dismiss="modal">Đóng</button>
+        </div>
+        
+      </div>
+    </div>
+</div>
+<!-- End Confirm delete -->
+
+<!-- Update user -->
+<div class='modal' tabindex='-1' role='dialog' id='edit-job-skills-modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Cập nhật thông tin kĩ năng</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <form  method="post">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="job_skill_name">Tên kĩ năng</label>
+                    <input class="form-control" type="text" placeholder="Node JS, Ux Ui" id="job_skill_name" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="job_skill_meta">Meta</label>
+                    <input disabled class="form-control job_skill_meta" type="text">
+                </div>
+                <input type="hidden" name="meta" class="job_skill_meta">
+            </div>           
+        
+        <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                <button type="button" class="btn btn-dark" data-dismiss="modal">Đóng</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- End Update user -->
+
+<script>
+    $('.remove-job-skill-btn').click(function () {
+        const id = $(this).data('id'); 
+        const name = $(this).data('name');
+
+        $('#job-skill-to-remove').text(name)
+        $('#confirm-remove-skill').attr('action', '/job_skills/delete/' + id)
+    })
+
+    $('.edit-job-skill-btn').click(function () {
+        const skill = $(this).data('skill')
+        $('#edit-job-skills-modal form').attr('action', '/job_skills/edit/' + skill.id)
+        $('#job_skill_name').val(skill.name)
+        $.each( $('.job_skill_meta'), (_, el) => el.value = skill.meta)
+    })
+</script>

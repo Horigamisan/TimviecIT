@@ -1,0 +1,19 @@
+<form action='/job_skills/edit/6410219c681311349b4b1661' method='post' id="add_job_skill">
+	<input type='text' name='name' placeholder="Tên kỹ năng" id="job_skill_name" value="{{name}}"/>
+    <input type="text" disabled class="job_skill_meta" value="{{meta}}">
+    <input type="hidden" name="meta" class="job_skill_meta" value="{{meta}}">
+
+	<input type='submit' value='Sửa' />
+</form>
+
+<script>
+    function hyphenateString(str) {
+        str = str.replace(/\s+/g, ' ');
+        return str.toLowerCase().replace(/\s/g, '-'); 
+    }
+
+    $('input#job_skill_name').keyup(function () {
+        const name = $('input#job_skill_name').val()
+        $('input.job_skill_meta').val(hyphenateString(name))
+    })
+</script>
