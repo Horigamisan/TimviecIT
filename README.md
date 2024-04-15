@@ -1,4 +1,4 @@
-# IT Jobs Search Platform - Connecting IT Talent and Employers
+# TimviecIT - Connecting IT Talent and Employers
 
 This platform forms a bridge between job seekers and employers in the IT industry. From fresher to experienced levels, part-time to full-time, we cover all spectrums of jobs. Our unique features include a job catalog, filters, an interactive map, custom error messages, and up-to-date popular skills in demand.
 
