@@ -373,13 +373,13 @@ $('#add-social').click(function () {
 		`
 			<li class='list-inline-item'>
 				<select name="socials[${count}][platform]">
-					<option value="facebook">facebook</option>
-					<option value="google" selected>google</option>
-					<option value="instagram">instagram</option>
+					<option value="facebook">Facebook</option>
+					<option value="google" selected>Google</option>
+					<option value="instagram">Instagram</option>
 				</select>
 
 				<input type="text" name="socials[${count}][link]" />
-				<button type="button" class="delete-social">delete</button>
+				<button type="button" class="delete-social btn btn-danger mt-3">Xoá mạng xã hội</button>
 			</li>
 		`
 	);
@@ -425,16 +425,16 @@ $('#add-edu').click(function () {
 			<div class='col-lg-12 mt-4 pt-2'>
 				<div class='d-flex'>
 					<div class='company-logo text-muted h6 me-3 text-center mr-5'>
-						<input type="text" name="education[${count}][start]">
+						<input type="text" name="education[${count}][start]" placeholder="Từ" class="form-control">
 						-
-						<input type="text" name="education[${count}][end]">
+						<input type="text" name="education[${count}][end]" placeholder="Đến" class="form-control">
 					</div>
 					<div class='flex-1'>
-						<input type="text" name="education[${count}][university]">
-						<input type="text" name="education[${count}][major]">
-						<input type="text" name="education[${count}][degree]">
+						<input type="text" name="education[${count}][university]" placeholder="Đại học" class="form-control">
+						<input type="text" name="education[${count}][major]" placeholder="Chuyên ngành" class="form-control my-2">
+						<input type="text" name="education[${count}][degree]" placeholder="Bậc" class="form-control">
 					</div>
-					<button type="button" class="delete-edu">delete</button>
+					<button type="button" class="ml-3 delete-edu btn btn-danger">Xoá</button>
 				</div>
 			</div>
 		`
@@ -456,13 +456,13 @@ $('#add-project').click(function () {
 				<div class='card border-0 work-container work-classic'>
 					<div class='card-body p-0'>
 						<div class='content pt-3'>
-							<input type="text" name="projects[${count}][name]">
-							<textarea name="projects[${count}][description]" rows="2"></textarea>
-							<input type="text" name="projects[${count}][source]" >
-							<input type="text" name="projects[${count}][demo]">
+							<input type="text" name="projects[${count}][name]" placeholder="Tên dự án" class="form-control">
+							<textarea name="projects[${count}][description]" rows="2" placeholder="Mô tả" class="form-control my-2"></textarea>
+							<input type="text" name="projects[${count}][source]" placeholder="Source" class="form-control my-2">
+							<input type="text" name="projects[${count}][demo]" placeholder="Link Demo" class="form-control">
 						</div>
 					</div>
-					<button type="button" class="delete-project">delete</button>
+					<button type="button" class="delete-project btn btn-danger my-2">Xoá</button>
 				</div>
 			</li>
 		`
@@ -481,16 +481,16 @@ $('#add-experience').click(function () {
 			<li class='col-lg-12 mt-4 pt-2'>
 				<div class='d-flex'>
 					<div class='company-logo text-muted h6 me-3 text-center mr-5'>
-						<input type="text" name="experience[${count}][start]">
+						<input type="text" name="experience[${count}][start]" placeholder="Từ" class="form-control">
 						-
-						<input type="text" name="experience[${count}][end]">
+						<input type="text" name="experience[${count}][end]" placeholder="Đến" class="form-control">
 					</div>
 					<div class='flex-1'>
-						<input type="text" name="experience[${count}][job]">
-						<input type="text" name="experience[${count}][company]">
-						<input type="text" name="experience[${count}][description]">
+						<input type="text" name="experience[${count}][job]" placeholder="Công việc" class="form-control">
+						<input type="text" name="experience[${count}][company]" placeholder="Tên công ty" class="form-control my-2">
+						<input type="text" name="experience[${count}][description]" placeholder="Mô tả công việc" class="form-control">
 					</div>
-					<button type="button" class="delete-experience">xóa</button>
+					<button type="button" class="delete-experience btn btn-danger mx-3">Xóa</button>
 				</div>
 			</li>
 		`

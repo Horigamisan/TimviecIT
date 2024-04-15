@@ -15,7 +15,7 @@ passport.use(
 		async function (_, _, profile, done) {
 			const user = await UserModel.findOneAndUpdate(
 				{ oauthID: profile.id },
-				{ name: profile.displayName, oauthID: profile.id, avatar: profile.picture },
+				{ name: profile.displayName, oauthID: profile.id, avatar: profile.picture, role: 'candidate' },
 				{ upsert: true }
 			);
 

@@ -156,7 +156,7 @@
 									<a class='dropdown-item' href='/companies/my-company'>Hồ sơ</a>
 								{{else}}
 									{{#if isCandidate}}
-										<a class='dropdown-item' href='/user/profile'>Hồ sơ</a>
+										<a class='dropdown-item' href='/user/profile/{{isCandidate._id}}'>Hồ sơ</a>
 										<a href="/user/bookmarked-jobs" class="dropdown-item">Công việc yêu thích</a>
 										<a href="/user/applied-jobs" class="dropdown-item">Công việc đã ứng tuyển</a>
 									{{/if}}
