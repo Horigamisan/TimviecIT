@@ -46,6 +46,7 @@ async function signup(req, res) {
 		role: req.params.role,
 		password: await bcrypt.hash(req.body.password, process.env.SALT),
 		status: req.params.role === 'company' ? 'pending' : 'active',
+		avatar: req.file ? req.file.path : '/uploads/images/default_avt.png',
 	});
 
 	if (req.params.role === 'employer') {
