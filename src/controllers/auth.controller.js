@@ -17,7 +17,7 @@ async function signin(req, res, next) {
 	if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
 		req.session.form = { email: req.body.email };
 		return next(
-			new CustomError('Tài khoản hay mật khẩu không đúng', 400, true)
+			new CustomError({},'Tài khoản hay mật khẩu không đúng', 400, true)
 		);
 	}
 

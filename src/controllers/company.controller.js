@@ -76,7 +76,6 @@ async function update(req, res) {
 	if (req.body.logo.size === 0) {
 		delete req.body.logo;
 	}
-
 	const id = req.session.company;
 	const company = await CompanyModel.findOneAndUpdate(
 		{ _id: id },

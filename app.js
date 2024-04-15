@@ -84,6 +84,7 @@ app.use(function (err, req, res, _) {
 		title: 'Lỗi',
 		type: 'danger',
 		message: err.message instanceof Array ? err.message : [err.message],
+		detailMsg: err.detailMsg,
 	};
 
 	res.redirect(req.get('referer') || '/');

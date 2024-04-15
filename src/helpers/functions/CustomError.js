@@ -1,7 +1,8 @@
 class CustomError extends Error {
-	constructor(message, statusCode, isFormError = false) {
+	constructor(detailMsg = {}, message, statusCode, isFormError = false) {
 		super();
 
+		this.detailMsg = detailMsg;
 		this.message = message;
 		this.statusCode = statusCode;
 		this.isFormError = isFormError;

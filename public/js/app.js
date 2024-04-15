@@ -525,7 +525,7 @@ function addProvince(_this) {
 	const provinces = $(_this).data('province');
 
 	const newProvinceItem = $(`<li>
-		<select class="province">
+		<select class="province form-control">
 			${provinces.map(
 				(province) =>
 					`<option value=${province.meta} ${
@@ -533,11 +533,11 @@ function addProvince(_this) {
 					}>${province.name}</option>`
 			)}
 		</select>
-		<button type="button" class="add-address" data-province="ha-noi">add</button>
+		<button type="button" class="add-address btn btn-primary my-2" data-province="ha-noi">Thêm</button>
 		<ul>
 			<li>
-				<input type="text" name="locations[ha-noi][]">
-				<button type="button" class="remove-address" onclick="removeOneLevel(this)">Xóa</button>
+				<input type="text" name="locations[ha-noi][]" class="form-control" placeholder="Địa chỉ công ty">
+				<button type="button" class="remove-address btn btn-danger mt-2" onclick="removeOneLevel(this)">Xóa</button>
 			</li>
 		</ul>
 	</li>`);
@@ -569,8 +569,8 @@ function addProvince(_this) {
 				.append(
 					`
 				<li>
-					<input type="text" name="locations[${province}][]">
-					<button type="button" class="remove-address">Xóa</button>
+					<input type="text" name="locations[${province}][]" class="form-control my-2" placeholder="Địa chỉ khác của công ty">
+					<button type="button" class="remove-address btn btn-danger">Xóa</button>
 				</li>
 			`
 				);

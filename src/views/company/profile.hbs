@@ -1,142 +1,145 @@
-<section
-	class='bg-half-260 d-table w-100'
-	style="background: url('{{company.wallpaper}}') center center no-repeat;"
->
+<section class='bg-half-260 d-table w-100' style="background: url('{{company.wallpaper}}') center center no-repeat;">
 	<div class='bg-overlay'></div>
 </section><!--end section-->
 <!-- Hero End -->
 <!-- Company Detail Start -->
 <section class='section'>
 	<div class='container'>
-		<form class='row profile' action="/companies/my-company/edit" method="post" enctype="multipart/form-data" id="company-profile">
+		<form class='row profile' action="/companies/my-company/edit" method="post" enctype="multipart/form-data"
+			id="company-profile">
 			<div class='col-lg-4 col-md-5 col-12'>
 				<div class='job-profile position-relative'>
 					<div class='rounded shadow bg-white'>
 						<div class='text-center py-5 border-bottom'>
-							<img
-								src='{{company.logo}}'
-								class='avatar avatar-medium mx-auto rounded-circle shadow read-only'
-								alt=''
-							/>
+							<img src='{{company.logo}}'
+								class='avatar avatar-medium mx-auto rounded-circle shadow read-only' alt='' />
 
-							<img 
-								src="{{company.logo}}" 
-								id="preview-img" 
+							<img src="{{company.logo}}" id="preview-img"
 								class='avatar avatar-medium mx-auto rounded-circle shadow editable-field editable-field'
-								style="cursor: pointer;"
-							>
+								style="cursor: pointer;">
 							<input type="file" name="logo" id="image-input" accept="image/*" style="display: none;">
 							<h5 class='mt-3 mb-0 read-only'>{{company.name}}</h5>
-							<input type="text" name="name" value="{{company.name}}" class="editable-field">
+							<input type="text" name="name" value="{{company.name}}" class="editable-field form-control"
+								placeholder="Tên công ty">
+							{{#if flash.detailMsg.name}}
+							<div class='text-danger'>{{flash.detailMsg.name}}</div>
+							{{/if}}
 						</div>
 
 						<div class='p-4'>
 							<h5>Chi tiết công ty :</h5>
 							<ul class='list-unstyled mb-4 mt-3'>
 								<li class='h6'>
-									<i
-										data-feather='map-pin'
-										class='fea icon-sm text-warning me-3 mr-2'
-									></i><span class='text-muted'>Địa chỉ : </span><button type="button" class="editable-field" id="add-province" onclick="addProvince(this)" data-province="{{toJson provinces}}">Thêm tỉnh</button>
+									<i data-feather='map-pin' class='fea icon-sm text-warning me-3 mr-2'></i><span
+										class='text-muted'>Địa chỉ : </span><button type="button"
+										class="editable-field btn btn-primary my-2" id="add-province"
+										onclick="addProvince(this)" data-province="{{toJson provinces}}">Thêm
+										tỉnh</button>
 									<ul class="read-only">
 										{{#each company.locations}}
-											<li>
-												<span class="read-only">{{provinceDisplay @key}}</span>
-												<ul>
-													{{#each .}}
-														<li>{{.}}</li>
-													{{/each}}
-												</ul>
-											</li>
+										<li>
+											<span class="read-only">{{provinceDisplay @key}}</span>
+											<ul>
+												{{#each .}}
+												<li>{{.}}</li>
+												{{/each}}
+											</ul>
+										</li>
 										{{/each}}
 									</ul>
-									
+
 									<ul class="editable-field list-locations">
 										{{#editLocation company.locations}}{{/editLocation}}
 									</ul>
+
 								</li>
+								{{#if flash.detailMsg.locations}}
+								<div class='text-danger'>{{flash.detailMsg.locations}}</div>
+								{{/if}}
 								<li class='h6'>
-									<i
-										data-feather='link'
-										class='fea icon-sm text-warning me-3 mr-2'
-									></i><span class='text-muted'>Website :</span>
-									<a
-										href='{{company.website}}'
-										class="read-only"
-									>{{company.website}}</a>
-									<input type="text" name="website" value="{{company.website}}" class="editable-field">
+									<i data-feather='link' class='fea icon-sm text-warning me-3 mr-2'></i><span
+										class='text-muted'>Website :</span>
+									<a href='{{company.website}}' class="read-only">{{company.website}}</a>
+									<input type="text" name="website" value="{{company.website}}"
+										class="editable-field form-control" placeholder="Địa chỉ trang web">
 								</li>
-								<li class='h6'><i
-										data-feather='clock'
-										class='fea icon-sm text-warning me-3 mr-2'
-									></i><span class='text-muted read-only'>Thời gian làm việc :</span>
+								{{#if flash.detailMsg.website}}
+								<div class='text-danger'>{{flash.detailMsg.website}}</div>
+								{{/if}}
+								<li class='h6'><i data-feather='clock'
+										class='fea icon-sm text-warning me-3 mr-2'></i><span
+										class='text-muted read-only'>Thời gian làm việc :</span>
 									{{company.workingTime}}
-									<input type="text" name="workingTime" value="{{company.workingTime}}" class="editable-field">
+									<input type="text" name="workingTime" value="{{company.workingTime}}"
+										class="editable-field form-control" placeholder="Thời gian làm việc">
 								</li>
-								<li class='h6'><i
-										data-feather='users'
-										class='fea icon-sm text-warning me-3 mr-2'
-									></i><span class='text-muted'>Quy mô :</span>
+								{{#if flash.detailMsg.workingTime}}
+								<div class='text-danger'>{{flash.detailMsg.workingTime}}</div>
+								{{/if}}
+								<li class='h6'><i data-feather='users'
+										class='fea icon-sm text-warning me-3 mr-2'></i><span class='text-muted'>Quy mô
+										:</span>
 									<span class="read-only">{{enterpriseSizesDisplay company.enterpriseSize}}</span>
-									<select name="enterpriseSize" class="editable-field">
+									<select name="enterpriseSize" class="editable-field form-control">
 										{{#each enterpriseSizes}}
-											<option value="{{@key}}">{{.}}</option>
+										<option value="{{@key}}">{{.}}</option>
 										{{/each}}
 									</select>
 								</li>
-								<li class='h6'><i
-										data-feather='users'
-										class='fea icon-sm text-warning me-3 mr-2'
-									></i><span class='text-muted'>Email :</span>
+								{{#if flash.detailMsg.enterpriseSize}}
+								<div class='text-danger'>{{flash.detailMsg.enterpriseSize}}</div>
+								{{/if}}
+								<li class='h6'><i data-feather='users'
+										class='fea icon-sm text-warning me-3 mr-2'></i><span class='text-muted'>Email
+										:</span>
 									<span class="read-only">{{company.email}}</span>
-									<input type="text" name="email" value="{{company.email}}" class="editable-field">
+									<input type="text" name="email" value="{{company.email}}"
+										class="editable-field form-control" placeholder="Email">
 								</li>
-								<li class='h6'><i
-										data-feather='users'
-										class='fea icon-sm text-warning me-3 mr-2'
-									></i><span class='text-muted'>Hotline :</span>
+								{{#if flash.detailMsg.email}}
+								<div class='text-danger'>{{flash.detailMsg.email}}</div>
+								{{/if}}
+								<li class='h6'><i data-feather='users'
+										class='fea icon-sm text-warning me-3 mr-2'></i><span class='text-muted'>Hotline
+										:</span>
 									<span class="read-only">{{company.hotline}}</span>
-									<input type="text" name="hotline" value="{{company.hotline}}" class="editable-field">
+									<input type="text" name="hotline" value="{{company.hotline}}"
+										class="editable-field form-control" placeholder="Đường dây nóng">
 								</li>
-								<li class='h6'><i
-										data-feather='users'
-										class='fea icon-sm text-warning me-3 mr-2'
-									></i><span class='text-muted'>Quốc gia :</span>
+								{{#if flash.detailMsg.hotline}}
+								<div class='text-danger'>{{flash.detailMsg.hotline}}</div>
+								{{/if}}
+								<li class='h6'><i data-feather='users'
+										class='fea icon-sm text-warning me-3 mr-2'></i><span class='text-muted'>Quốc gia
+										:</span>
 									<span class="read-only">{{company.country}}</span>
-									<input type="text" name="country" value="{{company.country}}" class="editable-field">
+									<input type="text" name="country" value="{{company.country}}"
+										class="editable-field form-control" placeholder="Quốc gia">
 								</li>
+								{{#if flash.detailMsg.country}}
+								<div class='text-danger'>{{flash.detailMsg.country}}</div>
+								{{/if}}
 							</ul>
 							<div class='d-grid'>
 								{{#if isOwner}}
-									<button
-										class='btn btn-primary toggle-edit-mode-btn read-only'
-										type="button"
-									>
-										Chỉnh sửa thông tin
-									</button>
+								<button class='btn btn-primary toggle-edit-mode-btn read-only' type="button">
+									Chỉnh sửa thông tin
+								</button>
 
-									<button
-										class='btn btn-danger toggle-edit-mode-btn editable-field'
-										type="button"
-									>
-										Hủy
-									</button>
+								<button class='btn btn-danger toggle-edit-mode-btn editable-field' type="button">
+									Hủy
+								</button>
 								{{else}}
-									{{#if isCandidate}}
-										<form action="/companies/{{company._id}}/follow-company" method="post">
-											<button
-												class='btn btn-primary'
-												type="submit"
-												{{#if isFollowed}}disabled{{/if}}
-											>
-												{{#if isFollowed}}
-													Đã theo dõi
-												{{else}}
-													Theo dõi
-												{{/if}}
-											</button>
-										</form>
+								{{#if isCandidate}}
+								<a href="/companies/{{company._id}}/follow-company" class="btn btn-primary"
+									role="button">
+									{{#if isFollowed}}
+									Đã theo dõi
+									{{else}}
+									Theo dõi
 									{{/if}}
+								</a>
+								{{/if}}
 								{{/if}}
 							</div>
 						</div>
@@ -148,27 +151,42 @@
 				<div class='ms-md-4'>
 					<h4>Giới thiệu công ty :</h4>
 					<div class="read-only text-muted mb-0">{{{company.introduction}}}</div>
-					<textarea id="company-introduction-editor" class="editable-field" name="introduction">{{{company.introduction}}}</textarea>
+					<textarea id="company-introduction-editor" class="editable-field"
+						name="introduction">{{{company.introduction}}}</textarea>
+
+					{{#if flash.detailMsg.introduction}}
+					<div class='text-danger'>{{flash.detailMsg.introduction}}</div>
+					{{/if}}
 
 
 					<h4 class='mt-lg-5 mt-4'>Chuyên môn của chúng tôi :</h4>
 					<div class='text-muted mb-0 my-3'>
 						<ul class="flex list-unstyled read-only">
 							{{#each company.techStack}}
-								<li class="skill-item mx-2 hover-change-color"><a href="/job?skills={{.}}">{{skillDisplayName .}}</a></li>
+							<li class="skill-item mx-2 hover-change-color"><a
+									href="/job?skills={{.}}">{{skillDisplayName .}}</a></li>
 							{{/each}}
 						</ul>
 
 						<select name="techStack[]" id="techStack" class="selectpicker editable-field" multiple>
 							{{#each skills}}
-								<option value="{{meta}}" {{selected meta ../company.techStack}}>{{name}}</option>
+							<option value="{{meta}}" {{selected meta ../company.techStack}}>{{name}}</option>
 							{{/each}}
 						</select>
 					</div>
 
+					{{#if flash.detailMsg.techStack}}
+					<div class='text-danger'>{{flash.detailMsg.techStack}}</div>
+					{{/if}}
+
 					<h4 class='mt-lg-5 mt-4'>Bạn sẽ thích làm việc tại đây :</h4>
 					<div class='text-muted mb-0 read-only'>{{{company.benefit}}}</div>
-					<textarea id="company-benefit-editor" class="editable-field" name="benefit">{{{company.benefit}}}</textarea>
+					<textarea id="company-benefit-editor" class="editable-field"
+						name="benefit">{{{company.benefit}}}</textarea>
+
+					{{#if flash.detailMsg.benefit}}
+					<div class='text-danger'>{{flash.detailMsg.benefit}}</div>
+					{{/if}}
 
 					<div class='mt-4 pt-2 editable-field'>
 						<button type="submit" class='btn btn-outline-primary'>Lưu</button>
@@ -177,11 +195,11 @@
 					<h4 class='mt-lg-5 mt-4'>Tuyển dụng :</h4>
 					<div class='row'>
 						{{#each jobs}}
-							<div class='col-lg-6 mt-4 pt-2'>
-								{{>jobItem job=. isAuth=../isAuth}}
-							</div>
+						<div class='col-lg-6 mt-4 pt-2'>
+							{{>jobItem job=. isAuth=../isAuth}}
+						</div>
 						{{else}}
-							<p class="row justify-content-center">Hiện chưa có công việc nào</p>
+						<p class="row justify-content-center">Hiện chưa có công việc nào</p>
 						{{/each}}
 					</div>
 
@@ -194,4 +212,3 @@
 		</form><!--end row-->
 	</div><!--end container-->
 </section><!--end section-->
-
