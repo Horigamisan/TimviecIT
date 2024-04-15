@@ -297,12 +297,15 @@ async function apply(req, res) {
 		coverLetter: req.body.coverLetter,
 	});
 
-	const user = await ApplyFormService.update(
+	const updatedCV = await ApplyFormService.update(
 		{ _id: (req.user || req.session.user)._id },
 		{
 			$push: { appliedJobs: req.params.id },
 		}
 	);
+
+	//get user from _.id
+	const user = await UserService.get({ _id: (req.user || req.session.user)._id });
 
 	if (req.user) {
 		req.user = user;

@@ -190,7 +190,9 @@
 					{{#if isStopRecruiting}}
 						<p class="text-danger text-bold">Ngừng tuyển dụng</p>
 					{{else}}
-						{{#applySection job.dueTo job.meta job._id}}{{/applySection}}
+						{{#unless isEmployer}}
+							{{#applySection job.dueTo job.meta job._id}}{{/applySection}}
+						{{/unless}}
 					{{/if}}
 				</div>
 			</div><!--end col-->
