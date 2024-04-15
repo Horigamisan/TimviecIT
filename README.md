@@ -1,40 +1,53 @@
-Web tìm việc IT
+# IT Jobs Search Platform - Connecting IT Talent and Employers
 
-# Các thành viên
+This platform forms a bridge between job seekers and employers in the IT industry. From fresher to experienced levels, part-time to full-time, we cover all spectrums of jobs. Our unique features include a job catalog, filters, an interactive map, custom error messages, and up-to-date popular skills in demand.
 
-- 52000709: Lê Minh Tâm
-- 52000703: Nguyễn Trọng Phúc
-- 52000698: Nguyễn Tấn Phát
-- 52000716: Nguyễn Hoài Thanh
+## Features:
 
-# Models
+#### Common Features:
 
-- catalog: trang chủ, việc làm, đăng tuyển
-- job category: việc + lương cao/mới/partime/intern/quản lý/phần cứng/phần mềm
-- job skills: nodejs, reactjs
-- job
-- employers
-- users
-- sponsors
-- portfolios
+- **Catalog:** Navigate through our platform.
+- **Home:** Our landing page to welcome you.
+- **Job Postings:** Updated daily with detailed descriptions.
+- **Users:** Interact with the community.
+- **Sponsors:** Our partners who make this possible.
 
-- find by skills
-- find by
+#### Job Seekers:
 
-- filter (skill, job position, location, keyword), sort
-- store coorperate and display on map
-- custom error message
-    <!-- - oauth login -->
-    <!-- - session login -->
-  <!-- - custom yup validation (image) -->
-  <!-- - upload image and edit -->
+- **Profile:** Create a detailed profile showcasing your portfolio.
+- **Find Jobs:** Use our smart filters to find your perfect job.
+- **Keyword searches:** Sort jobs based on keywords.
+- **Skillset filter:** Sort jobs based on popular skills like NodeJS, ReactJS, etc.
+- **Map Integration:** Locate corporations and job locations.
 
-<<<<<<< HEAD
-<!-- upload -> file -->
-- restrict to
-=======
-upload -> file
+#### Employers:
 
-# Báo cáo, Bảng tự đánh giá, Khảo sát
+- **Profile:** Company portfolio including size, establishment date, open roles, etc.
+- **Post Jobs:** List your open roles to attract the right candidates.
+- **Manage Applications:** Monitor applications received and schedule interviews.
+- **Search Candidates:** Source candidates based on their skills and experience.
 
-Link :https://drive.google.com/drive/folders/1daoAjbd8hGi_Gu8BYvvDnLaX_eFrELjo?usp=sharing
+## Built with:
+- Node.js
+- Bootstrap
+- Express.js
+- Handlebars
+- MongoDB
+
+## Getting Started:
+
+1. Before you start, ensure that you have Node.js 12+ installed.
+2. Clone the repository: `git clone repository-url`.
+3. Navigate into the repository: `cd repository-name`.
+4. Install the dependencies: `npm install`.
+5. Start the application: `npm run start`.
+
+The app will be live at `http://localhost:3000` or your specified PORT.
+
+## Contributions & Issues:
+Should you find a bug or suggest an idea, feel free to open an issue or make a PR.
+
+## License:
+Open-source under the MIT License. You are free to use, modify, and distribute the project.
+
+Happy job hunting and hiring!
